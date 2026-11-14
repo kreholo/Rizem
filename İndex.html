@@ -1,0 +1,764 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Özür Dilerim Rizelim 💚</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Quicksand & Nunito (Yuvarlak ve tatlı fontlar, Türkçe karakter destekli) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Quicksand', 'Nunito', 'sans-serif'],
+            body: ['Nunito', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FFFDF9',
+            mint: {
+              50: '#F2FBF6',
+              100: '#E0F5EA',
+              200: '#C2EAD6',
+              300: '#95D9B9',
+              400: '#5EC296',
+              500: '#38A678',
+            },
+            sage: {
+              100: '#E5EFE9',
+              200: '#CBE0D4',
+              600: '#4F7360',
+              800: '#2D4739',
+            },
+            blush: {
+              50: '#FFF5F7',
+              100: '#FFE4EA',
+              200: '#FFCCD7',
+              400: '#F47293',
+              500: '#E15377',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Genel yazı tipi ve yumuşak kaydırma/dokunma ayarları */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(145deg, #FFFDF9 0%, #E7F7EE 48%, #FCEEF2 100%);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    h1, h2, .font-cute {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+    }
+
+    /* Arka planda yavaşça süzülen kalpler için animasyon */
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) translateX(0px) rotate(0deg) scale(0.85);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.75;
+      }
+      50% {
+        transform: translateY(50vh) translateX(18px) rotate(10deg) scale(1);
+      }
+      85% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-12vh) translateX(-14px) rotate(-10deg) scale(0.9);
+        opacity: 0;
+      }
+    }
+
+    .floating-bg-heart {
+      position: fixed;
+      bottom: -40px;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatUp linear infinite;
+    }
+
+    /* Sevimli ayıcık ve çay bardağı için yumuşak salınım */
+    @keyframes gentleBob {
+      0%, 100% {
+        transform: translateY(0px) rotate(-1deg);
+      }
+      50% {
+        transform: translateY(-7px) rotate(1.5deg);
+      }
+    }
+
+    .animate-bob {
+      animation: gentleBob 3.4s ease-in-out infinite;
+    }
+
+    /* Çay buharı animasyonu */
+    @keyframes steamRise {
+      0% {
+        transform: translateY(0px) scale(0.85);
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: translateY(-16px) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    .steam-1 {
+      animation: steamRise 2.6s ease-in-out infinite;
+    }
+    .steam-2 {
+      animation: steamRise 2.6s ease-in-out 0.9s infinite;
+    }
+    .steam-3 {
+      animation: steamRise 2.6s ease-in-out 1.7s infinite;
+    }
+
+    /* Kalp atışı efekti */
+    @keyframes softHeartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.12); }
+      45% { transform: scale(0.98); }
+      65% { transform: scale(1.08); }
+    }
+
+    .animate-heartbeat {
+      display: inline-block;
+      animation: softHeartbeat 2.2s ease-in-out infinite;
+    }
+
+    /* Tıklama / dokunma anında patlayan kalpler */
+    @keyframes burstHeart {
+      0% {
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+        opacity: 1;
+      }
+      65% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.15) rotate(var(--rot));
+        opacity: 0;
+      }
+    }
+
+    .click-heart-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 60;
+      animation: burstHeart 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Naz yapıyorum butonu hafif titreme */
+    @keyframes cuteWiggle {
+      0%, 100% { transform: rotate(0deg) scale(var(--btn-scale, 1)); }
+      25% { transform: rotate(-5deg) scale(var(--btn-scale, 1)); }
+      75% { transform: rotate(5deg) scale(var(--btn-scale, 1)); }
+    }
+
+    .animate-wiggle {
+      animation: cuteWiggle 0.35s ease-in-out;
+    }
+
+    /* Kart giriş animasyonu */
+    @keyframes cardPopIn {
+      0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    .card-entrance {
+      animation: cardPopIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  </style>
+</head>
+<body class="min-h-[100dvh] w-full flex flex-col items-center justify-center p-4 sm:p-6 relative selection:bg-mint-200 selection:text-sage-800">
+
+  <!-- Pastel Arka Plan Dekoratif Işık Hareleri -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div class="absolute -top-20 -left-20 w-72 h-72 sm:w-96 sm:h-96 bg-mint-200/45 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-24 w-72 h-72 sm:w-96 sm:h-96 bg-blush-200/40 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 left-1/4 w-80 h-80 sm:w-[28rem] sm:h-[28rem] bg-sage-200/50 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Arka Planda Süzülen Kalpler Konteyneri -->
+  <div id="floating-hearts-bg" class="fixed inset-0 pointer-events-none z-[1]" aria-hidden="true"></div>
+
+  <!-- Kutlama Konfeti & Yeşil Kalp Yağmuru Canvas'ı -->
+  <canvas id="celebration-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- Ana Sevimli Kart -->
+  <main class="relative z-10 w-full max-w-md sm:max-w-lg bg-white/85 backdrop-blur-md border-2 border-mint-200/90 rounded-[2.25rem] shadow-[0_20px_60px_-15px_rgba(56,166,120,0.18)] p-6 sm:p-9 text-center card-entrance transition-all duration-500">
+    
+    <!-- Üst Mini Rozet -->
+    <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-mint-50 border border-mint-200 text-sage-600 text-xs sm:text-sm font-bold tracking-wide mb-3 shadow-sm">
+      <span>🌿</span>
+      <span id="top-badge-text">Rize esintili küçük bir barışma notu</span>
+      <span>💚</span>
+    </div>
+
+    <!-- Konuşma Balonu (Naz yaptıkça değişen tatlı mesajlar) -->
+    <div class="min-h-[2.5rem] flex items-center justify-center mb-1">
+      <div id="speech-bubble" class="inline-block bg-blush-50 border border-blush-200 text-blush-500 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-2xl shadow-sm transition-all duration-300">
+        Sana taze demlenmiş Rize çayı getirdim... 🥺🫖
+      </div>
+    </div>
+
+    <!-- Sevimli Animasyonlu SVG İllüstrasyon: Yeşil Kalp & İnce Belli Çay Tutan Tatlı Ayıcık -->
+    <div class="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto my-1 flex items-center justify-center animate-bob">
+      <svg viewBox="0 0 240 240" class="w-full h-full drop-shadow-[0_10px_18px_rgba(56,166,120,0.14)]" xmlns="http://www.w3.org/2000/svg">
+        <!-- Yumuşak Arka Daire -->
+        <circle cx="120" cy="126" r="88" fill="#E8F8F0" />
+        <circle cx="120" cy="126" r="76" fill="#FFFDF9" stroke="#C2EAD6" stroke-width="2.5" stroke-dasharray="6 6" />
+
+        <!-- Çay Bardağından Çıkan Kalpli Buharlar -->
+        <g class="steam-1">
+          <path d="M168 88 C164 82, 172 76, 168 70" stroke="#95D9B9" stroke-width="2.5" stroke-linecap="round" fill="none" />
+        </g>
+        <g class="steam-2">
+          <path d="M178 84 C178 81, 183 81, 183 84 C183 81, 188 81, 188 84 C188 88, 183 91, 183 91 C183 91, 178 88, 178 84 Z" fill="#5EC296" />
+        </g>
+        <g class="steam-3">
+          <path d="M190 92 C194 86, 187 80, 191 74" stroke="#F47293" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.75" />
+        </g>
+
+        <!-- Ayıcık Kulakları -->
+        <circle cx="76" cy="68" r="21" fill="#E7C6A5" stroke="#C89F79" stroke-width="2.5" />
+        <circle cx="76" cy="68" r="11" fill="#F9D5DC" />
+        <circle cx="156" cy="68" r="21" fill="#E7C6A5" stroke="#C89F79" stroke-width="2.5" />
+        <circle cx="156" cy="68" r="11" fill="#F9D5DC" />
+
+        <!-- Ayıcık Gövdesi -->
+        <path d="M68 186 C68 144, 86 126, 116 126 C146 126, 164 144, 164 186 Z" fill="#E7C6A5" stroke="#C89F79" stroke-width="2.5" />
+        <!-- Göbek Kısmı -->
+        <ellipse cx="116" cy="166" rx="28" ry="22" fill="#F7E6D4" />
+
+        <!-- Ayıcık Kafası -->
+        <ellipse cx="116" cy="96" rx="48" ry="41" fill="#EED1B3" stroke="#C89F79" stroke-width="2.5" />
+
+        <!-- Ağız/Burun Bölgesi -->
+        <ellipse cx="116" cy="107" rx="18" ry="13" fill="#FFF8F0" />
+        <!-- Minik Sevimli Burun -->
+        <path d="M111 102 C111 99.5, 121 99.5, 121 102 C121 105, 117.5 107.5, 116 107.5 C114.5 107.5, 111 105, 111 102 Z" fill="#7C5840" />
+
+        <!-- Pembe Yanaklar -->
+        <ellipse cx="85" cy="104" rx="8.5" ry="5.5" fill="#FFACC0" opacity="0.75" />
+        <ellipse cx="147" cy="104" rx="8.5" ry="5.5" fill="#FFACC0" opacity="0.75" />
+
+        <!-- İfade 1: Özür Dileyen Masum Gözler (Başlangıçta görünür) -->
+        <g id="bear-sad-face">
+          <!-- Sol Göz -->
+          <circle cx="95" cy="91" r="5.5" fill="#4A3525" />
+          <circle cx="93.3" cy="89" r="2" fill="#FFFFFF" />
+          <circle cx="96.5" cy="92.5" r="1" fill="#FFFFFF" />
+          <!-- Sağ Göz -->
+          <circle cx="137" cy="91" r="5.5" fill="#4A3525" />
+          <circle cx="135.3" cy="89" r="2" fill="#FFFFFF" />
+          <circle cx="138.5" cy="92.5" r="1" fill="#FFFFFF" />
+          <!-- Masum Kaşlar -->
+          <path d="M87 82 Q94 79 100 83" stroke="#7C5840" stroke-width="2.2" stroke-linecap="round" fill="none" />
+          <path d="M145 82 Q138 79 132 83" stroke="#7C5840" stroke-width="2.2" stroke-linecap="round" fill="none" />
+          <!-- Minik Büzülmüş Dudak -->
+          <path d="M111 114 Q116 111 121 114" stroke="#7C5840" stroke-width="2.2" stroke-linecap="round" fill="none" />
+        </g>
+
+        <!-- İfade 2: Affedilince Mutlu Gülen Gözler (Başlangıçta gizli) -->
+        <g id="bear-happy-face" class="hidden">
+          <!-- Mutlu Kavisli Gözler -->
+          <path d="M88 92 Q95 83 102 92" stroke="#4A3525" stroke-width="3" stroke-linecap="round" fill="none" />
+          <path d="M130 92 Q137 83 144 92" stroke="#4A3525" stroke-width="3" stroke-linecap="round" fill="none" />
+          <!-- Mutlu Gülümseme -->
+          <path d="M108 111 Q116 120 124 111" stroke="#7C5840" stroke-width="2.5" stroke-linecap="round" fill="#FF9EB5" />
+        </g>
+
+        <!-- Ayıcığın Tuttuğu Büyük Yeşil Kalp 💚 -->
+        <g transform="translate(88, 134)">
+          <path d="M28 11 C28 3, 15 0, 9 7 C3 14, 7 25, 28 39 C49 25, 53 14, 47 7 C41 0, 28 3, 28 11 Z" fill="#4ADE80" stroke="#22C55E" stroke-width="2.2" />
+          <!-- Kalp Parıltısı -->
+          <path d="M13 11 Q16 8 19 10" stroke="#DCFCE7" stroke-width="2.2" stroke-linecap="round" fill="none" />
+        </g>
+
+        <!-- Sol Pati (Yeşil Kalbi Tutuyor) -->
+        <ellipse cx="85" cy="154" rx="13" ry="10" transform="rotate(-18 85 154)" fill="#E7C6A5" stroke="#C89F79" stroke-width="2.2" />
+
+        <!-- Sağ Tarafta İnce Belli Rize Çayı Bardağı ve Tabağı 🫖 -->
+        <g transform="translate(154, 106)">
+          <!-- Çay Tabağı -->
+          <ellipse cx="26" cy="54" rx="22" ry="6" fill="#FFFFFF" stroke="#95D9B9" stroke-width="2" />
+          <path d="M12 54 Q26 58 40 54" stroke="#F47293" stroke-width="1.5" fill="none" stroke-dasharray="3 2" />
+          <!-- İnce Belli Cam Bardak -->
+          <path d="M16 14 C16 22, 20 27, 20 33 C20 39, 14 45, 16 52 L36 52 C38 45, 32 39, 32 33 C32 27, 36 22, 36 14 Z" fill="#FFFDF9" fill-opacity="0.88" stroke="#95D9B9" stroke-width="2" />
+          <!-- Tavşan Kanı Rize Çayı -->
+          <path d="M17.5 22 C18.5 26, 20.5 29, 20.5 33 C20.5 39, 15.5 44, 17 50.5 L35 50.5 C36.5 44, 31.5 39, 31.5 33 C31.5 29, 33.5 26, 34.5 22 Z" fill="#D97736" opacity="0.88" />
+          <!-- Çay Yüzeyi Parıltısı -->
+          <ellipse cx="26" cy="22" rx="8.5" ry="2" fill="#F59E0B" opacity="0.65" />
+          <!-- Bardak Cam Yansıması -->
+          <path d="M21 25 L21 44" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+        </g>
+
+        <!-- Sağ Pati (Çay Bardağının Yanında) -->
+        <ellipse cx="154" cy="152" rx="13" ry="10" transform="rotate(15 154 152)" fill="#E7C6A5" stroke="#C89F79" stroke-width="2.2" />
+      </svg>
+    </div>
+
+    <!-- Ana Başlık: özür dilerim rizelim💚 -->
+    <h1 id="main-title" class="text-3xl sm:text-4xl font-bold text-sage-800 tracking-tight leading-snug mt-1 mb-2.5">
+      özür dilerim rizelim<span class="animate-heartbeat ml-0.5">💚</span>
+    </h1>
+
+    <!-- Alt Sevgi & Özür Mesajı -->
+    <p id="sub-message" class="text-sage-600 text-sm sm:text-base font-semibold leading-relaxed max-w-sm mx-auto mb-7 px-2">
+      Seni üzdüğüm için çok pişmanım... Güzel kalbin yumuşasın, yüzün yeniden gülsün istiyorum. Barışalım mı? 🌿✨
+    </p>
+
+    <!-- Etkileşimli Affetme Butonları (Başlangıç Durumu) -->
+    <div id="action-buttons-container" class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 min-h-[4.5rem] transition-all duration-300">
+      <!-- Affettim Butonu -->
+      <button
+        id="forgive-btn"
+        type="button"
+        style="--btn-scale: 1;"
+        class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-mint-400 to-mint-500 hover:from-mint-500 hover:to-emerald-500 text-white font-bold text-base sm:text-lg shadow-[0_10px_25px_-5px_rgba(56,166,120,0.45)] hover:shadow-[0_14px_30px_-5px_rgba(56,166,120,0.6)] active:scale-95 transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 z-20"
+      >
+        <span>Affettim</span>
+        <span>💚</span>
+      </button>
+
+      <!-- Naz Yapıyorum Butonu -->
+      <button
+        id="tease-btn"
+        type="button"
+        style="--btn-scale: 1;"
+        class="px-5 py-3 rounded-2xl bg-blush-50 hover:bg-blush-100 border-2 border-blush-200 text-blush-500 font-bold text-sm sm:text-base shadow-sm active:scale-95 transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5"
+      >
+        <span id="tease-btn-text">Naz yapıyorum 🥺</span>
+      </button>
+    </div>
+
+    <!-- Kutlama Aksiyonları (Affedildikten Sonra Görünür) -->
+    <div id="celebration-actions" class="hidden flex-col items-center justify-center gap-3 mt-2">
+      <button
+        id="more-hearts-btn"
+        type="button"
+        class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-mint-400 to-emerald-500 hover:from-mint-500 hover:to-emerald-600 text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-5px_rgba(56,166,120,0.45)] active:scale-95 transition-all duration-200 cursor-pointer flex items-center gap-2"
+      >
+        <span>Bir Sarılma Daha Gönder</span>
+        <span>💚✨</span>
+      </button>
+
+      <button
+        id="reset-btn"
+        type="button"
+        class="text-xs sm:text-sm font-bold text-sage-600/75 hover:text-sage-800 underline decoration-mint-300 underline-offset-4 py-1.5 px-3 rounded-xl transition-colors cursor-pointer"
+      >
+        Naz yapma kısmını tekrar dene 🙈
+      </button>
+    </div>
+
+    <!-- Alt Küçük İpucu -->
+    <p class="mt-6 text-[11px] sm:text-xs font-semibold text-sage-600/65 flex items-center justify-center gap-1">
+      <span>Ekranda istediğin yere dokun, kalpler uçuşsun</span>
+      <span>💚</span>
+    </p>
+  </main>
+
+  <script>
+    /**
+     * Tatlış Özür Dilerim Rizelim 💚 Etkileşim ve Animasyon Mantığı
+     */
+    (function () {
+      // DOM Elemanları
+      const floatingBg = document.getElementById('floating-hearts-bg');
+      const speechBubble = document.getElementById('speech-bubble');
+      const topBadgeText = document.getElementById('top-badge-text');
+      const mainTitle = document.getElementById('main-title');
+      const subMessage = document.getElementById('sub-message');
+      const forgiveBtn = document.getElementById('forgive-btn');
+      const teaseBtn = document.getElementById('tease-btn');
+      const teaseBtnText = document.getElementById('tease-btn-text');
+      const actionButtonsContainer = document.getElementById('action-buttons-container');
+      const celebrationActions = document.getElementById('celebration-actions');
+      const moreHeartsBtn = document.getElementById('more-hearts-btn');
+      const resetBtn = document.getElementById('reset-btn');
+      const bearSadFace = document.getElementById('bear-sad-face');
+      const bearHappyFace = document.getElementById('bear-happy-face');
+      const canvas = document.getElementById('celebration-canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Durum Değişkenleri
+      let teaseCount = 0;
+      let forgiveScale = 1;
+      let teaseScale = 1;
+      let isForgiven = false;
+
+      // Naz yapıldıkça sırayla gösterilecek tatlı Türkçe mesajlar
+      const pleadingMessages = [
+        {
+          btn: "Emin misin? 🥺",
+          bubble: "Bak yavru ayıcık bile boynunu büktü... 🥺"
+        },
+        {
+          btn: "Bak sana çay ısmarlarım 🫖",
+          bubble: "Hem de tavşan kanı, taptaze Rize çayı! 🫖🌿"
+        },
+        {
+          btn: "Gönlünü alayım lütfen 💚",
+          bubble: "Sen gülünce her yer yemyeşil yayla oluyor 💚"
+        },
+        {
+          btn: "Kıyma bana rizelim 🥹",
+          bubble: "Söz bir daha hiç üzmeyeceğim seni 🤞💚"
+        },
+        {
+          btn: "Bir şans daha? 🌿",
+          bubble: "Bak yeşil buton ne kadar tatlı parlıyor 👀💚"
+        },
+        {
+          btn: "Tamam naz bitti mi? 🙈",
+          bubble: "Hadi bas artık şu yeşil kalbe rizelim! 💚✨"
+        }
+      ];
+
+      /**
+       * Web Audio API ile harici dosya kullanmadan yumuşak, tatlı bir melodi çalar
+       */
+      function playSweetChime() {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return;
+          const audioCtx = new AudioCtx();
+          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 (Yumuşak arpej)
+          
+          notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.09);
+
+            gain.gain.setValueAtTime(0.001, audioCtx.currentTime + idx * 0.09);
+            gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + idx * 0.09 + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.09 + 0.45);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + idx * 0.09);
+            osc.stop(audioCtx.currentTime + idx * 0.09 + 0.46);
+          });
+        } catch (err) {
+          // Ses engellenirse sessizce devam et
+        }
+      }
+
+      /**
+       * Arka planda yavaşça süzülen pastel yeşil & pembe kalpleri oluşturur
+       */
+      function initFloatingBackgroundHearts() {
+        const heartSymbols = ['💚', '🌿', '🤍', '🩷', '💚'];
+        const count = window.innerWidth < 640 ? 14 : 22;
+
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement('span');
+          el.className = 'floating-bg-heart';
+          el.textContent = heartSymbols[i % heartSymbols.length];
+          el.style.left = `${Math.random() * 96}%`;
+          el.style.fontSize = `${14 + Math.random() * 16}px`;
+          el.style.animationDuration = `${9 + Math.random() * 10}s`;
+          el.style.animationDelay = `${-Math.random() * 14}s`;
+          floatingBg.appendChild(el);
+        }
+      }
+
+      /**
+       * Tıklanan veya dokunulan noktada mini kalp patlaması oluşturur
+       */
+      function spawnClickHeartBurst(x, y) {
+        const emojis = ['💚', '💚', '🌿', '✨', '🩷', '🤍'];
+        const particleCount = 8;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('span');
+          particle.className = 'click-heart-particle';
+          particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+          const angle = (Math.PI * 2 * i) / particleCount + (Math.random() * 0.5 - 0.25);
+          const distance = 42 + Math.random() * 55;
+          const tx = Math.cos(angle) * distance;
+          const ty = Math.sin(angle) * distance - 18;
+          const rot = (Math.random() * 60 - 30) + 'deg';
+
+          particle.style.left = `${x}px`;
+          particle.style.top = `${y}px`;
+          particle.style.fontSize = `${15 + Math.random() * 11}px`;
+          particle.style.setProperty('--tx', `${tx}px`);
+          particle.style.setProperty('--ty', `${ty}px`);
+          particle.style.setProperty('--rot', rot);
+
+          document.body.appendChild(particle);
+          setTimeout(() => particle.remove(), 980);
+        }
+      }
+
+      // Ekranda herhangi bir yere tıklama / dokunma dinleyicisi
+      document.addEventListener('pointerdown', (e) => {
+        spawnClickHeartBurst(e.clientX, e.clientY);
+      });
+
+      /**
+       * "Naz yapıyorum 🥺" butonuna tıklanınca çalışan sevimli etkileşim
+       */
+      teaseBtn.addEventListener('click', () => {
+        if (isForgiven) return;
+
+        const currentMsg = pleadingMessages[teaseCount % pleadingMessages.length];
+        teaseBtnText.textContent = currentMsg.btn;
+        speechBubble.textContent = currentMsg.bubble;
+
+        // Konuşma balonuna hafif vurgu animasyonu
+        speechBubble.classList.remove('scale-105');
+        void speechBubble.offsetWidth;
+        speechBubble.classList.add('scale-105');
+        setTimeout(() => speechBubble.classList.remove('scale-105'), 220);
+
+        teaseCount++;
+
+        // Affettim butonunu büyüt (mobil ekrandan taşmayacak üst sınırla)
+        forgiveScale = Math.min(1.42, 1 + teaseCount * 0.08);
+        forgiveBtn.style.transform = `scale(${forgiveScale})`;
+        forgiveBtn.style.margin = `${Math.min(10, teaseCount * 2)}px ${Math.min(14, teaseCount * 3)}px`;
+
+        // Naz yapıyorum butonunu hafifçe küçült ve salla
+        teaseScale = Math.max(0.72, 1 - teaseCount * 0.055);
+        teaseBtn.style.setProperty('--btn-scale', teaseScale);
+        teaseBtn.style.transform = `scale(${teaseScale})`;
+
+        teaseBtn.classList.remove('animate-wiggle');
+        void teaseBtn.offsetWidth;
+        teaseBtn.classList.add('animate-wiggle');
+      });
+
+      /**
+       * Canvas Konfeti ve Yeşil Kalp Yağmuru Sistemi
+       */
+      let confettiParticles = [];
+      let animationFrameId = null;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function launchCelebrationShower(burstAmount = 95) {
+        const pastelColors = [
+          '#4ADE80', // Canlı Pastel Yeşil
+          '#34D399', // Mint Yeşili
+          '#86EFAC', // Açık Nane
+          '#F47293', // Yumuşak Gül Pembe
+          '#FBCFE8', // Pastel Pembe
+          '#FDE68A', // Sıcak Krem Altın
+          '#A7F3D0'  // Adaçayı Mint
+        ];
+
+        for (let i = 0; i < burstAmount; i++) {
+          const isHeart = Math.random() < 0.62;
+          confettiParticles.push({
+            x: Math.random() * canvas.width,
+            y: -20 - Math.random() * (canvas.height * 0.45),
+            size: isHeart ? (14 + Math.random() * 14) : (7 + Math.random() * 7),
+            color: pastelColors[Math.floor(Math.random() * pastelColors.length)],
+            speedY: 2.2 + Math.random() * 3.4,
+            speedX: (Math.random() - 0.5) * 2.4,
+            wobble: Math.random() * Math.PI * 2,
+            wobbleSpeed: 0.04 + Math.random() * 0.05,
+            rotation: Math.random() * Math.PI * 2,
+            rotationSpeed: (Math.random() - 0.5) * 0.08,
+            isHeart: isHeart,
+            opacity: 0.95
+          });
+        }
+
+        if (!animationFrameId) {
+          animateConfetti();
+        }
+      }
+
+      function drawHeartShape(context, x, y, size, color, rotation, opacity) {
+        context.save();
+        context.translate(x, y);
+        context.rotate(rotation);
+        context.globalAlpha = opacity;
+        context.fillStyle = color;
+
+        const topCurveHeight = size * 0.3;
+        context.beginPath();
+        context.moveTo(0, topCurveHeight);
+        // Sol üst kavis
+        context.bezierCurveTo(
+          0, 0,
+          -size / 2, 0,
+          -size / 2, topCurveHeight
+        );
+        // Sol alt uç
+        context.bezierCurveTo(
+          -size / 2, (size + topCurveHeight) / 2,
+          0, (size + topCurveHeight) / 1.35,
+          0, size
+        );
+        // Sağ alt uç
+        context.bezierCurveTo(
+          0, (size + topCurveHeight) / 1.35,
+          size / 2, (size + topCurveHeight) / 2,
+          size / 2, topCurveHeight
+        );
+        // Sağ üst kavis
+        context.bezierCurveTo(
+          size / 2, 0,
+          0, 0,
+          0, topCurveHeight
+        );
+        context.closePath();
+        context.fill();
+        context.restore();
+      }
+
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = confettiParticles.length - 1; i >= 0; i--) {
+          const p = confettiParticles[i];
+          p.wobble += p.wobbleSpeed;
+          p.x += p.speedX + Math.sin(p.wobble) * 1.1;
+          p.y += p.speedY;
+          p.rotation += p.rotationSpeed;
+
+          if (p.y > canvas.height - 60) {
+            p.opacity = Math.max(0, p.opacity - 0.02);
+          }
+
+          if (p.isHeart) {
+            drawHeartShape(ctx, p.x, p.y, p.size, p.color, p.rotation, p.opacity);
+          } else {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.globalAlpha = p.opacity;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.roundRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65, 3);
+            ctx.fill();
+            ctx.restore();
+          }
+
+          if (p.y > canvas.height + 40 || p.opacity <= 0) {
+            confettiParticles.splice(i, 1);
+          }
+        }
+
+        if (confettiParticles.length > 0) {
+          animationFrameId = requestAnimationFrame(animateConfetti);
+        } else {
+          animationFrameId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      /**
+       * "Affettim 💚" butonuna tıklanınca kutlama moduna geçiş
+       */
+      forgiveBtn.addEventListener('click', (e) => {
+        isForgiven = true;
+        playSweetChime();
+
+        // Tıklanan yerden ekstra kalp patlaması
+        const rect = forgiveBtn.getBoundingClientRect();
+        spawnClickHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+        // Ayıcığın yüzünü mutlu hale getir
+        bearSadFace.classList.add('hidden');
+        bearHappyFace.classList.remove('hidden');
+
+        // Metinleri kutlama mesajlarıyla güncelle
+        topBadgeText.textContent = "Dünyanın en tatlı barışması gerçekleşti";
+        speechBubble.textContent = "İyi ki varsın, kalbim pır pır oldu! 🥰💚";
+        speechBubble.className = "inline-block bg-mint-100 border border-mint-300 text-sage-800 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-2xl shadow-sm transition-all duration-300";
+
+        mainTitle.innerHTML = 'Yaşasın! Seni çok seviyorum rizelim<span class="animate-heartbeat ml-1">💚</span>';
+        subMessage.textContent = "Gönlünü aldığım için çok mutluyum! İlk buluşmada bol demli Rize çayları ve en tatlı sohbetler benden 🫖🌿💚";
+
+        // Buton alanlarını değiştir
+        actionButtonsContainer.classList.add('hidden');
+        celebrationActions.classList.remove('hidden');
+        celebrationActions.classList.add('flex');
+
+        // Yeşil kalp ve pastel konfeti yağmurunu başlat
+        launchCelebrationShower(115);
+      });
+
+      // Ekstra sarılma / kalp yağmuru butonu
+      moreHeartsBtn.addEventListener('click', (e) => {
+        playSweetChime();
+        launchCelebrationShower(75);
+        const rect = moreHeartsBtn.getBoundingClientRect();
+        spawnClickHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      });
+
+      // Başa dönme (tekrar naz yapma) butonu
+      resetBtn.addEventListener('click', () => {
+        isForgiven = false;
+        teaseCount = 0;
+        forgiveScale = 1;
+        teaseScale = 1;
+
+        forgiveBtn.style.transform = 'scale(1)';
+        forgiveBtn.style.margin = '0';
+        teaseBtn.style.transform = 'scale(1)';
+        teaseBtn.style.setProperty('--btn-scale', 1);
+        teaseBtnText.textContent = 'Naz yapıyorum 🥺';
+
+        bearHappyFace.classList.add('hidden');
+        bearSadFace.classList.remove('hidden');
+
+        topBadgeText.textContent = 'Rize esintili küçük bir barışma notu';
+        speechBubble.textContent = 'Sana taze demlenmiş Rize çayı getirdim... 🥺🫖';
+        speechBubble.className = 'inline-block bg-blush-50 border border-blush-200 text-blush-500 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-2xl shadow-sm transition-all duration-300';
+
+        mainTitle.innerHTML = 'özür dilerim rizelim<span class="animate-heartbeat ml-0.5">💚</span>';
+        subMessage.textContent = 'Seni üzdüğüm için çok pişmanım... Güzel kalbin yumuşasın, yüzün yeniden gülsün istiyorum. Barışalım mı? 🌿✨';
+
+        celebrationActions.classList.add('hidden');
+        celebrationActions.classList.remove('flex');
+        actionButtonsContainer.classList.remove('hidden');
+      });
+
+      // Başlangıçta arka plan kalplerini başlat
+      initFloatingBackgroundHearts();
+    })();
+  </script>
+</body>
+</html>
+```
